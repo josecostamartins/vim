@@ -7,10 +7,10 @@ DISCLAIMER: still in it's early ages
 ### Plugins:
 * solarized theme for mac vim
 * wombat256mod theme for terminal vim
-* airline: status line revamped
-* python autocompletion
+* airline for status line revamped
+* jedi-vim for python autocompletion
 * minibuffer explorer, help managing buffers (INSTALLED BUT NOT USING)
-* virtualenv
+* virtualenv for managing virutal environments, also useful for jedi-vim autocompletion
 * nerdtree for directory tree listing (INSTALLED BUT NOT USING)
 * syntastic for syntax checking
 * vim-pony for Django Commands
