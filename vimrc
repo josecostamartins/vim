@@ -18,11 +18,6 @@ filetype off                  " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :BundleInstall
-endif
 
 
 " let Vundle manage Vundle
@@ -36,18 +31,25 @@ Bundle 'gmarik/vundle'
 """"""""""""""""""""""""""""
 "solarized theme
 Bundle 'altercation/vim-colors-solarized'
+
 "status line revamped
 Bundle 'bling/vim-airline'
+
 "python autocompletion
 Bundle 'davidhalter/jedi-vim'
+
 "minibuffer explorer, help managing buffers
 Bundle 'fholgado/minibufexpl.vim'
+
 "easily use a virtualenv
 Bundle 'jmcantrell/vim-virtualenv'
+
 "file explorer
 Bundle 'scrooloose/nerdtree'
+
 "syntax checker for many languages
 Bundle 'scrooloose/syntastic'
+
 "Django Commands
 Bundle 'jmcomets/vim-pony'
 "Bundle 'cwood/vim-jango'
@@ -65,6 +67,16 @@ Bundle 'django.vim'
 """"""""""""""""""""
 " non-GitHub repos "
 """"""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""
+" First time install for vundle "
+"""""""""""""""""""""""""""""""""
+if iCanHazVundle == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
 
 filetype plugin indent on     " required!
 "
@@ -84,8 +96,8 @@ filetype plugin indent on     " required!
 " Enable syntax highlighting
 set t_Co=256 " force console to have 256 colors
 syntax enable
-set background=light
-color slate
+set background=dark
+color wombat256mod
 if has("gui_running")
   colorscheme solarized
 endif
