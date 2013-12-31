@@ -99,7 +99,7 @@ syntax enable
 set background=dark
 color wombat256mod
 if has("gui_running")
-  colorscheme solarized
+    colorscheme solarized
 endif
 " let g:solarized_termtrans = 1
 " solarized options
@@ -156,137 +156,150 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
- set autoindent                                             "auto indentation
- set autoread                                               " reload files when changed on disk, i.e. via `git checkout`
- set backspace=2                                            " Fix broken backspace in some setups
- set backupcopy=yes                                         " see :help crontab
- set clipboard=unnamed                                      " yank and paste with the system clipboard
- set directory-=.                                           " don't store swapfiles in the current directory
- set encoding=utf-8
- set expandtab                                              " expand tabs to spaces
- set hidden
- set ignorecase                                             " case-insensitive search
- set incsearch                                              " search as you type
- set laststatus=2                                           " always show statusline
- set list                                                   " show trailing whitespace
- set listchars=tab:▸\ ,trail:▫
- set nobackup
- set noswapfile                                             " do not create a swap file
- set number                                                 " show line numbers
- set ruler                                                  " show where you are
- set scrolloff=3                                            " show context above/below cursorline
- set shiftwidth=4                                           " normal mode indentation commands use 4 spaces
- set showcmd
- set smartcase                                              " case-sensitive search if any caps
- set splitbelow                  " Puts new split windows to the bottom of the current
- set splitright                  " Puts new vsplit windows to the right of the current
- set tabstop=4
- set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
- set wildmenu                                                 " show a navigable menu for tab completion
- set wildmode=longest,list,full
- set pastetoggle=<F2> " enter in paste mode
- set clipboard=unnamed " accepts pasting from the system, not only from vim to vim
- set mouse=a " allows the usage of a mouse with vim
+set autoindent                                             "auto indentation
+set autoread                                               " reload files when changed on disk, i.e. via `git checkout`
+set backspace=2                                            " Fix broken backspace in some setups
+set backupcopy=yes                                         " see :help crontab
+set clipboard=unnamed                                      " yank and paste with the system clipboard
+set colorcolumn=+1
+set directory-=.                                           " don't store swapfiles in the current directory
+set encoding=utf-8
+set expandtab                                              " expand tabs to spaces
+set hidden
+set ignorecase                                             " case-insensitive search
+set incsearch                                              " search as you type
+set laststatus=2                                           " always show statusline
+set list                                                   " show trailing whitespace
+set listchars=tab:▸\ ,trail:▫
+set nobackup
+set noswapfile                                             " do not create a swap file
+set number                                                 " show line numbers
+set ruler                                                  " show where you are
+set scrolloff=3                                            " show context above/below cursorline
+set shiftwidth=4                                           " normal mode indentation commands use 4 spaces
+set showcmd
+set smartcase                                              " case-sensitive search if any caps
+set splitbelow                                             " Puts new split windows to the bottom of the current
+set splitright                                             " Puts new vsplit windows to the right of the current
+set tabstop=4
+set textwidth=79
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+set wildmenu                                               " show a navigable menu for tab completion
+set wildmode=longest,list,full
+set pastetoggle=<F2>                                       " enter in paste mode
+set clipboard=unnamed                                      " accepts pasting from the system, not only from vim to vim
+set mouse=a                                                " allows the usage of a mouse with vim
+set ttimeoutlen=50                                         " set a timeout, this makes moving in and out of Insert Mode quicker
+set hidden                                                 " manage tabs like other editors
 
- set ttimeoutlen=50 " set a timeout, this makes moving in and out of Insert Mode quicker
+" keep selection after shifting it
+vnoremap < <gv
+vnoremap > >gv
 
- set hidden                      " manage tabs like other editors
+autocmd! bufwritepost .vimrc source % " auto reload .vimrc file
+autocmd BufWritePre .vimrc,*.py,*.html :%s/\s\+$//e " remove trailing whitespaces
 
- " keep selection after shifting it
- vnoremap < <gv
- vnoremap > >gv
+" Allows to use different shortcuts, the default leader key is \
+let mapleader = ","
+map <D-S-left> :tabprevious<CR>
+map <D-S-right> :tabnext<CR>
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-left> <C-w>h
+map <C-down> <C-w>j
+map <C-up> <C-w>k
+map <C-right> <C-w>l
 
- " autocmd! bufwritepost .vimrc source % " auto reload .vimrc file
- autocmd BufWritePre .vimrc,*.py,*.html :%s/\s\+$//e " remove trailing whitespaces
+" Swap lines up and down by pression shift-up or shift-down
+map <S-up> :m-2<CR>
+map <S-down> :m+1<CR>
+
+" Save file by pressing ctrl-s
+noremap  <silent> <C-S>  :update<CR>
+inoremap <silent> <C-S>  <C-C>:update<CR>i
+vnoremap <silent> <C-S>  <C-O>:update<CR>gv
+
+" map sort function to a key
+vnoremap <leader>s :sort<CR>
+
+" force circumflex to go to firs non-blak character of the line
+nnoremap ^ 0w
+
+" Syntastic configuration for python
+let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_python_flake8_args='--ignore=E126,E128,E124,E123'
+let g:syntastic_python_pylint_args="--indent-string='    '"
+
+" Django configuration
+
+"
+"let g:django_projects = '~/Documents/Projects/' "Sets all projects under project
+"let g:django_project_directory = '~/Documents/Projects/'
+" let g:django_project_container = 'source' "Inside of these folders look for source
+"let g:django_activate_virtualenv = 0 "Try to activate the associated virtualenv
+"let g:django_activate_nerdtree = 0 "Try to open nerdtree at the project root.
+
+"ctrlp configuration
+
+"start ctrlp in the current folder
+let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
+
+" let g:ctrlp_working_path_mode = 0
+
+" tab navigation
+"nmap tn :tabn<CR>
+"nmap tp :tabp<CR>
+"nmap tm :tabm
+"nmap tt :tabnew
+"nmap ts :tab split<CR>
+
+" minibufexpl toggle
+" map <Leader>t :MBEToggle<cr>
+
+" noremap <C-TAB>   :MBEbn<CR>
+" noremap <C-S-TAB> :MBEbp<CR>
 
 
- " map sort function to a key
- vnoremap <leader>s :sort<CR>
+" NERDTree (better file browser) toggle
+" map <leader>t :NERDTreeToggle<CR>
 
- " Allows to use different shortcuts, the default leader key is \
- let mapleader = ","
- map <D-S-left> :tabprevious<CR>
- map <D-S-right> :tabnext<CR>
- map <C-h> <C-w>h
- map <C-j> <C-w>j
- map <C-k> <C-w>k
- map <C-l> <C-w>l
- map <C-left> <C-w>h
- map <C-down> <C-w>j
- map <C-up> <C-w>k
- map <C-right> <C-w>l
+" Ignore files on NERDTree
+" let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
- map <S-up> :m-2<CR>
- map <S-down> :m+1<CR>
-
- " Syntastic configuration for python
- let g:syntastic_python_checkers = ['flake8']
-
- " Django configuration
- "
- "let g:django_projects = '~/Documents/Projects/' "Sets all projects under project
- "let g:django_project_directory = '~/Documents/Projects/'
- " let g:django_project_container = 'source' "Inside of these folders look for source
- "let g:django_activate_virtualenv = 0 "Try to activate the associated virtualenv
- "let g:django_activate_nerdtree = 0 "Try to open nerdtree at the project root.
-
- "ctrlp configuration
-
- "start ctrlp in the current folder
- let g:ctrlp_working_path_mode = 'a'
-
- " let g:ctrlp_working_path_mode = 0
-
- " tab navigation
- "nmap tn :tabn<CR>
- "nmap tp :tabp<CR>
- "nmap tm :tabm
- "nmap tt :tabnew
- "nmap ts :tab split<CR>
-
- " minibufexpl toggle
- map <Leader>t :MBEToggle<cr>
-
- noremap <C-TAB>   :MBEbn<CR>
- noremap <C-S-TAB> :MBEbp<CR>
+" Set autocomplete form
+"set completeopt=menuone,longest
 
 
- " NERDTree (better file browser) toggle
- " map <leader>t :NERDTreeToggle<CR>
+"--- python formatting help ---
+autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
- " Ignore files on NERDTree
- " let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+" Enable omni completion.
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown,ctp set omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType php,ctp set omnifunc=phpcomplete#CompletePHP
+"autocmd FileType vim set omnifunc=syntaxcomplete#Complete
 
- " Set autocomplete form
- "set completeopt=menuone,longest
+" remaping the save to ctrl-z
+"noremap <D-z> :update<CR>
+"vnoremap <D-z> <D-C> :update<CR>
+"inoremap <D-z> <D-O> :update<CR>
 
- "--- python formatting help ---
- autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+"if executable('ag')
+"  let g:ackprg = 'ag --nogroup --column'
 
- " Enable omni completion.
- "autocmd FileType css set omnifunc=csscomplete#CompleteCSS
- "autocmd FileType html,markdown,ctp set omnifunc=htmlcomplete#CompleteTags
- "autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
- "autocmd FileType python set omnifunc=pythoncomplete#Complete
- "autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
- "autocmd FileType php,ctp set omnifunc=phpcomplete#CompletePHP
- "autocmd FileType vim set omnifunc=syntaxcomplete#Complete
+  " Use Ag over Grep
+"  set grepprg=ag\ --nogroup\ --nocolor
 
- " remaping the save to ctrl-z
- noremap <C-Z> :update<CR>
- vnoremap <C-Z> <C-C> :update<CR>
- inoremap <C-Z> <C-O> :update<CR>
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"endif
 
- " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
- "if executable('ag')
- "  let g:ackprg = 'ag --nogroup --column'
-
-   " Use Ag over Grep
- "  set grepprg=ag\ --nogroup\ --nocolor
-
-   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
- "  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
- "endif
-
- " maps the command ,-shift-v to source my vimrc, maybe this is not needed
- map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+" maps the command ,-shift-v to source my vimrc, maybe this is not needed
+map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
