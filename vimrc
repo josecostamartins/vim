@@ -39,13 +39,16 @@ Bundle 'bling/vim-airline'
 Bundle 'davidhalter/jedi-vim'
 
 "minibuffer explorer, help managing buffers
-Bundle 'fholgado/minibufexpl.vim'
+"Bundle 'fholgado/minibufexpl.vim'
 
 "easily use a virtualenv
 Bundle 'jmcantrell/vim-virtualenv'
 
 "file explorer
-Bundle 'scrooloose/nerdtree'
+"Bundle 'scrooloose/nerdtree'
+
+" easy comment
+Bundle "scrooloose/nerdcommenter"
 
 "syntax checker for many languages
 Bundle 'scrooloose/syntastic'
@@ -53,8 +56,22 @@ Bundle 'scrooloose/syntastic'
 "Django Commands
 Bundle 'jmcomets/vim-pony'
 "Bundle 'cwood/vim-jango'
+
 "Wombat256 coloscheme
 Bundle 'vim-scripts/wombat256.vim'
+
+" Latex plugin
+Bundle 'LaTeX-Box-Team/LaTeX-Box'
+
+" Creates indentations guides within text
+Bundle 'nathanaelkane/vim-indent-guides'
+
+" Lets me use <tab> instead of <c-space> for completion
+" Bonus for using jedi when filetype is python
+Bundle 'ervandew/supertab'
+
+" UtilSnips for snippets, apparently it's awesome
+Bundle 'SirVer/ultisnips'
 
 """""""""""""""""""""
 " vim-scripts repos "
@@ -63,6 +80,9 @@ Bundle 'vim-scripts/wombat256.vim'
 Bundle 'ctrlp.vim'
 " django template highlight
 Bundle 'django.vim'
+
+"Bundle 'LateX-Box'
+
 
 """"""""""""""""""""
 " non-GitHub repos "
@@ -197,7 +217,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 autocmd! bufwritepost .vimrc source % " auto reload .vimrc file
-autocmd BufWritePre .vimrc,*.py,*.html :%s/\s\+$//e " remove trailing whitespaces
+autocmd BufWritePre .vimrc,*.py,*.html,*.tex :%s/\s\+$//e " remove trailing whitespaces
 
 " Allows to use different shortcuts, the default leader key is \
 let mapleader = ","
@@ -224,13 +244,20 @@ vnoremap <silent> <C-S>  <C-O>:update<CR>gv
 " map sort function to a key
 vnoremap <leader>s :sort<CR>
 
-" force circumflex to go to firs non-blak character of the line
+" force circumflex to go to first non-blak character of the line
 nnoremap ^ 0w
 
 " Syntastic configuration for python
 let g:syntastic_python_checkers = ['flake8', 'pylint']
 let g:syntastic_python_flake8_args='--ignore=E126,E128,E124,E123'
 let g:syntastic_python_pylint_args="--indent-string='    '"
+
+" LaTeX-Box Configuration
+let g:LatexBox_latexmk_options = "-pdfps"
+let g:LatexBox_autojump = 1
+
+" SuperTab configuration
+" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " Django configuration
 
