@@ -9,10 +9,14 @@ DISCLAIMER: still in it's early ages
 * wombat256mod theme for terminal vim
 * airline for status line revamped
 * jedi-vim for python autocompletion
-* virtualenv for managing virutal environments, also useful for jedi-vim autocompletion
+* virtualenv for managing virtual environments, also useful for jedi-vim autocompletion
 * syntastic for syntax checking
 * vim-pony for Django Commands
 * vundle for plugin management
+* vim-indent-guides for visual indentation
+* supertab for tab completion
+* ultisnips for code snippets
+
 
 Also, i auto-install vundle by using this tip:
 http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
