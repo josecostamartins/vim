@@ -4,22 +4,14 @@
 " Setting up Vundle - the vim plugin bundler
     let iCanHazVundle=1
     let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-    let bash_prof=expand('~/.bash_profile')
+    let init_conf=expand('~/.vim/.initial_config.sh')
     if !filereadable(vundle_readme)
         echo "Installing Vundle.."
         echo ""
         silent !mkdir -p ~/.vim/bundle
         silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-        silent !pip install flake8
-        silent !pip install jedi
-        silent !pip install virtualenvwrapper
-        if !filereadable(bash_prof)
-            silent !touch "~/.bash_profile"
-            silent !echo "PATH=/usr/local/bin:$PATH" >> ~/.bash_profile
-            silent !echo "export PATH" >> ~/.bash_profile
-            silent !echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bash_profile
-            silent !echo "export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python" >> ~/.bash_profile
-            silent !echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bash_profile
+        if filereadable(init_conf)
+            silent ! ~/.vim/.initial_config.sh
         endif
         let iCanHazVundle=0
     endif
