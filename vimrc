@@ -4,14 +4,14 @@
 " Setting up Vundle - the vim plugin bundler
     let iCanHazVundle=1
     let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-    let init_conf=expand('~/.vim/.initial_config.sh')
+    let init_conf=expand('~/.vim/initial_config.sh')
     if !filereadable(vundle_readme)
         echo "Installing Vundle.."
         echo ""
         silent !mkdir -p ~/.vim/bundle
         silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
         if filereadable(init_conf)
-            silent ! ~/.vim/.initial_config.sh
+            silent ! ~/.vim/initial_config.sh
         endif
         let iCanHazVundle=0
     endif
