@@ -69,8 +69,6 @@ Bundle 'scrooloose/syntastic'
 Bundle 'jmcomets/vim-pony'
 "Bundle 'cwood/vim-jango'
 
-"Wombat256 coloscheme
-Bundle 'vim-scripts/wombat256.vim'
 
 " Latex plugin
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
@@ -85,16 +83,20 @@ Bundle 'ervandew/supertab'
 " UtilSnips for snippets, apparently it's awesome
 Bundle 'SirVer/ultisnips'
 
+" wombat modified colorscheme
+Bundle 'michalbachowski/vim-wombat256mod'
+
 """""""""""""""""""""
 " vim-scripts repos "
 """""""""""""""""""""
 " open files easily by pressing ctrl+p and typing the filename
 Bundle 'ctrlp.vim'
+
 " django template highlight
 Bundle 'django.vim'
 
-"Bundle 'LateX-Box'
-
+"Wombat256 coloscheme
+Bundle 'wombat256.vim'
 
 """"""""""""""""""""
 " non-GitHub repos "
@@ -163,7 +165,10 @@ endif
 
 set noshowmode " hide original status line because of airline
 set laststatus=2 " always show statusline, needed in order to display airline
-set guifont=Sauce\ Code\ Powerline\ for\ Powerline:h13
+set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+"set guifont=Monaco\ For\ Powerline
+"set guifont=Menlo\ For\ Powerline
+"set guifont=Liberation\ Mono\ For\ Powerline:h13
 
 let g:airline_theme = 'murmur'
 let g:airline_powerline_fonts = 1
@@ -229,7 +234,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 autocmd! bufwritepost .vimrc source % " auto reload .vimrc file
-autocmd BufWritePre .vimrc,*.py,*.html,*.tex :%s/\s\+$//e " remove trailing whitespaces
+autocmd BufWritePre .vimrc,*.py,*.html,*.tex,*.js :%s/\s\+$//e " remove trailing whitespaces
 
 " Allows to use different shortcuts, the default leader key is \
 let mapleader = ","
@@ -265,7 +270,8 @@ let g:syntastic_python_flake8_args='--ignore=E126,E128,E124,E123'
 let g:syntastic_python_pylint_args="--indent-string='    '"
 
 " LaTeX-Box Configuration
-let g:LatexBox_latexmk_options = "-pdfps"
+let g:LatexBox_latexmk_options = "-pvc -pdfps"
+let g:LatexBox_latexmk_async=1
 let g:LatexBox_autojump = 1
 
 " SuperTab configuration
