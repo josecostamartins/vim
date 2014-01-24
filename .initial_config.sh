@@ -36,7 +36,7 @@ done
 for f in $FONTS; do 
     fullname="$FONTS_DIR"$(basename "$f")
     if [ ! -f "$fullname" ]; then 
-        cp $f "$FONTS_PATH"
+        cp "$fi" "$FONTS_PATH"
     fi
 done
 
