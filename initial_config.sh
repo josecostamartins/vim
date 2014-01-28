@@ -2,7 +2,7 @@
 
 BASH_PROFILE=~/.bash_profile
 
-STRING_TO_APPEND=( "PATH=/usr/local/bin:$PATH" "export PATH" "export WORKON_HOME=~/.virtualenvs" "export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python" "source /usr/local/bin/virtualenvwrapper.sh" )
+PATH_TO_APPEND=( "PATH=/usr/local/bin:\$PATH" "export PATH" "export WORKON_HOME=~/.virtualenvs" "export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python" "source /usr/local/bin/virtualenvwrapper.sh" )
 
 FONTS=~/.vim/fonts/*
 FONTS_PATH=~/Library/Fonts
@@ -12,6 +12,7 @@ command_exists () {
 }
 
 if command_exists pip; then
+    echo "Install flake8, jedi, virtualenv and virtualenvwrapper..."
     pip install flake8
     pip install jedi
     pip install virtualenvwrapper
@@ -20,22 +21,32 @@ else
     echo "You should install python using homebrew"
 fi
 
-if [ ! -f "$BASH_PROFILE" ]; then 
-    touch "$BASH_PROFILE" 
+if command_exists brew; then
+    echo "Installing node.js..."
+    brew install node
+else
+    echo "could not install node"
+    echo "install homebrew first"
 fi
 
-for i in "${STRING_TO_APPEND[@]}"; do
+
+if [ ! -f "$BASH_PROFILE" ]; then
+    echo "Creating $BASH_PROFILE""..."
+    touch "$BASH_PROFILE"
+fi
+
+for i in "${PATH_TO_APPEND[@]}"; do
     if grep -q "$i" "$BASH_PROFILE"; then
         continue
     else
-        echo "Writing $i to $BASH_PROFILE"
+        echo "Appending $i to $BASH_PROFILE"
         echo $i >> "$BASH_PROFILE"
     fi
 done
 
-for f in $FONTS; do 
+for f in $FONTS; do
     fullname="$FONTS_DIR"$(basename "$f")
-    if [ ! -f "$fullname" ]; then 
+    if [ ! -f "$fullname" ]; then
         cp "$f" "$FONTS_PATH"
     fi
 done

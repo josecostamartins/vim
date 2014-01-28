@@ -33,34 +33,36 @@ Bundle 'gmarik/vundle'
 """"""""""""""""""""""""""""
 " original repos on GitHub "
 """"""""""""""""""""""""""""
-"solarized theme
+" solarized theme
 Bundle 'altercation/vim-colors-solarized'
 
-"status line revamped
+" status line revamped
 Bundle 'bling/vim-airline'
 
-"python autocompletion
+" python autocompletion
 Bundle 'davidhalter/jedi-vim'
 
-"minibuffer explorer, help managing buffers
+" minibuffer explorer, help managing buffers
 "Bundle 'fholgado/minibufexpl.vim'
 
-"easily use a virtualenv
+" Virtualenv commands inside vim
 Bundle 'jmcantrell/vim-virtualenv'
 
-"file explorer
+" file explorer
 "Bundle 'scrooloose/nerdtree'
 
-" easy comment
+" Comment more easily
 Bundle "scrooloose/nerdcommenter"
 
-"syntax checker for many languages
+" syntax checker for many languages
 Bundle 'scrooloose/syntastic'
 
-"Django Commands
+" Django Commands
 Bundle 'jmcomets/vim-pony'
 "Bundle 'cwood/vim-jango'
 
+" html crazy completion
+Bundle "mattn/emmet-vim"
 
 " Latex plugin
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
