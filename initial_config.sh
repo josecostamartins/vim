@@ -1,15 +1,25 @@
 #!/bin/bash
 
-BASH_PROFILE=~/.bash_profile
-
-PATH_TO_APPEND=( "PATH=/usr/local/bin:\$PATH" "export PATH" "export WORKON_HOME=~/.virtualenvs" "export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python" "source /usr/local/bin/virtualenvwrapper.sh" )
-
-FONTS=~/.vim/fonts/*
-FONTS_PATH=~/Library/Fonts
 
 command_exists () {
     type "$1" &> /dev/null ;
 }
+
+if [ "$(uname)" == "Darwin" ]; then
+    BASH_PROFILE=~/.bash_profile
+    FONTS_PATH=~/Library/Fonts
+    # Do something under Mac OS X platform        
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    BASH_PROFILE=~/.bashrc
+    FONTS_PATH=~/.fonts
+    sudo apt-get install vim
+    sudo apt-get install python-pip python-dev build-essential
+    # Do something under Linux platform
+fi
+
+FONTS=~/.vim/fonts/*
+
+PATH_TO_APPEND=( "PATH=/usr/local/bin:\$PATH" "export PATH" "export WORKON_HOME=~/.virtualenvs" "export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python" "source /usr/local/bin/virtualenvwrapper.sh" )
 
 if command_exists pip; then
     echo "Install flake8, jedi, virtualenv and virtualenvwrapper..."
@@ -29,7 +39,6 @@ else
     echo "install homebrew first"
 fi
 
-
 if [ ! -f "$BASH_PROFILE" ]; then
     echo "Creating $BASH_PROFILE""..."
     touch "$BASH_PROFILE"
@@ -45,7 +54,7 @@ for i in "${PATH_TO_APPEND[@]}"; do
 done
 
 for f in $FONTS; do
-    fullname="$FONTS_DIR"$(basename "$f")
+    fullname="$FONTS"$(basename "$f")
     if [ ! -f "$fullname" ]; then
         cp "$f" "$FONTS_PATH"
     fi
