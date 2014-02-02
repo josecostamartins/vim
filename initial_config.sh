@@ -54,7 +54,7 @@ for i in "${PATH_TO_APPEND[@]}"; do
 done
 
 for f in $FONTS; do
-    fullname="$FONTS"$(basename "$f")
+    fullname="$FONTS_PATH"$(basename "$f")
     if [ ! -f "$fullname" ]; then
         cp "$f" "$FONTS_PATH"
     fi

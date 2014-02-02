@@ -196,6 +196,7 @@ set colorcolumn=+1
 set directory-=.                                           " don't store swapfiles in the current directory
 set encoding=utf-8
 set expandtab                                              " expand tabs to spaces
+set fo-=t                                                  " don't automatically wrap text when typing
 set hidden
 set ignorecase                                             " case-insensitive search
 set incsearch                                              " search as you type
@@ -204,6 +205,7 @@ set list                                                   " show trailing white
 set listchars=tab:▸\ ,trail:▫
 set nobackup
 set noswapfile                                             " do not create a swap file
+set nowrap                                                 " don't automatically wrap on load
 set number                                                 " show line numbers
 set ruler                                                  " show where you are
 set scrolloff=3                                            " show context above/below cursorline
@@ -273,7 +275,9 @@ let g:LatexBox_autojump = 1
 
 " Django configuration
 
-"
+" emmet-vim integration with ultisnips
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
 "let g:django_projects = '~/Documents/Projects/' "Sets all projects under project
 "let g:django_project_directory = '~/Documents/Projects/'
 " let g:django_project_container = 'source' "Inside of these folders look for source
