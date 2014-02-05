@@ -80,6 +80,9 @@ Bundle 'SirVer/ultisnips'
 " wombat modified colorscheme
 Bundle 'michalbachowski/vim-wombat256mod'
 
+" monokai theme
+Bundle 'sickill/vim-monokai'
+
 """""""""""""""""""""
 " vim-scripts repos "
 """""""""""""""""""""
@@ -127,7 +130,7 @@ syntax enable
 set background=dark
 color wombat256mod
 if has("gui_running")
-    colorscheme solarized
+    colorscheme monokai
 endif
 " let g:solarized_termtrans = 1
 " solarized options
@@ -266,8 +269,9 @@ let g:syntastic_python_flake8_args='--ignore=E126,E128,E124,E123'
 let g:syntastic_python_pylint_args="--indent-string='    '"
 
 " LaTeX-Box Configuration
-let g:LatexBox_latexmk_options = "-pvc -pdfps"
+let g:LatexBox_latexmk_options = "-pdf -pvc"
 let g:LatexBox_latexmk_async=1
+let g:LatexBox_latexmk_preview_continuously=1
 let g:LatexBox_autojump = 1
 
 " SuperTab configuration
