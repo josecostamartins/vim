@@ -59,7 +59,7 @@ Bundle 'scrooloose/syntastic'
 
 " Django Commands
 Bundle 'jmcomets/vim-pony'
-"Bundle 'cwood/vim-jango'
+" Bundle 'cwood/vim-jango'
 
 " html crazy completion
 Bundle "mattn/emmet-vim"
@@ -68,7 +68,7 @@ Bundle "mattn/emmet-vim"
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 
 " Creates indentations guides within text
-Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'Yggdroot/indentLine'
 
 " Lets me use <tab> instead of <c-space> for completion
 " Bonus for using jedi when filetype is python
@@ -82,6 +82,12 @@ Bundle 'michalbachowski/vim-wombat256mod'
 
 " monokai theme
 Bundle 'sickill/vim-monokai'
+
+" manipulate surroundings
+Bundle "tpope/vim-surround"
+
+" tabularization of csv data
+Bundle 'godlygeek/tabular'
 
 """""""""""""""""""""
 " vim-scripts repos "
@@ -128,7 +134,8 @@ filetype plugin indent on     " required!
 set t_Co=256 " force console to have 256 colors
 syntax enable
 set background=dark
-color wombat256mod
+"colorscheme wombat256mod
+color monokai
 if has("gui_running")
     colorscheme monokai
 endif
@@ -162,7 +169,7 @@ endif
 
 set noshowmode " hide original status line because of airline
 set laststatus=2 " always show statusline, needed in order to display airline
-set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 "set guifont=Monaco\ For\ Powerline
 "set guifont=Menlo\ For\ Powerline
 "set guifont=Liberation\ Mono\ For\ Powerline:h13
@@ -190,59 +197,69 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set scrolloff=3                                            " show context above/below cursorline
 set autoindent                                             "auto indentation
 set autoread                                               " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                            " Fix broken backspace in some setups
 set backupcopy=yes                                         " see :help crontab
 set clipboard=unnamed                                      " yank and paste with the system clipboard
-set colorcolumn=+1
+set colorcolumn=+1                                         " highlight column number textwidth+1, in my case column 80, to show the limit
 set directory-=.                                           " don't store swapfiles in the current directory
-set encoding=utf-8
+set encoding=utf-8                                         " set ytf-8 as the default encoding
 set expandtab                                              " expand tabs to spaces
 set fo-=t                                                  " don't automatically wrap text when typing
-set hidden
+set hidden                                                 " manage tabs like other editors
 set ignorecase                                             " case-insensitive search
 set incsearch                                              " search as you type
 set laststatus=2                                           " always show statusline
 set list                                                   " show trailing whitespace
-set listchars=tab:▸\ ,trail:▫
-set nobackup
+set listchars=tab:▸\ ,trail:▫                              " show tabs and trailing spaces
+set mouse=a                                                " allows the usage of a mouse with vim
+set nobackup                                               " do not make backup of files
 set noswapfile                                             " do not create a swap file
 set nowrap                                                 " don't automatically wrap on load
 set number                                                 " show line numbers
+set pastetoggle=<F2>                                       " enter in paste mode
 set ruler                                                  " show where you are
-set scrolloff=3                                            " show context above/below cursorline
 set shiftwidth=4                                           " normal mode indentation commands use 4 spaces
-set showcmd
+set showcmd                                                " show the command you are typing, if on mac this is the default
 set smartcase                                              " case-sensitive search if any caps
 set splitbelow                                             " Puts new split windows to the bottom of the current
 set splitright                                             " Puts new vsplit windows to the right of the current
 set tabstop=4
-set textwidth=79
+set textwidth=79                                           " Limit size of line to 79 characters, python recommended
+set ttimeoutlen=50                                         " set a timeout, this makes moving in and out of Insert Mode quicker
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu                                               " show a navigable menu for tab completion
 set wildmode=longest,list,full
-set pastetoggle=<F2>                                       " enter in paste mode
-set clipboard=unnamed                                      " accepts pasting from the system, not only from vim to vim
-set mouse=a                                                " allows the usage of a mouse with vim
-set ttimeoutlen=50                                         " set a timeout, this makes moving in and out of Insert Mode quicker
-set hidden                                                 " manage tabs like other editors
+
+
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10     "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
 
 " keep selection after shifting it
 vnoremap < <gv
 vnoremap > >gv
 
-autocmd! bufwritepost .vimrc source % " auto reload .vimrc file
-autocmd BufWritePre .vimrc,*.py,*.html,*.tex,*.js :%s/\s\+$//e " remove trailing whitespaces
+autocmd BufWritePre .vimrc,*.py,*.html,*.tex,*.js,*.css :%s/\s\+$//e " remove trailing whitespaces
+" autocmd! bufwritepost .vimrc source % " auto reload .vimrc file
 
-" Allows to use different shortcuts, the default leader key is \
-let mapleader = ","
+let mapleader = ","                                    " Allows to use different shortcuts, the default leader key is \
+
+" change tabs by pressing command-shift-left or command-shift-right
 map <D-S-left> :tabprevious<CR>
 map <D-S-right> :tabnext<CR>
+
+" simplify changing buffers
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+" also allow to change buffers using arrow keys
 map <C-left> <C-w>h
 map <C-down> <C-w>j
 map <C-up> <C-w>k
@@ -274,13 +291,23 @@ let g:LatexBox_latexmk_async=1
 let g:LatexBox_latexmk_preview_continuously=1
 let g:LatexBox_autojump = 1
 
+" indent guidelines
+set list lcs=tab:\|\
+
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+
 " SuperTab configuration
 " let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " Django configuration
 
 " emmet-vim integration with ultisnips
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+"let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_mode='a'    "enable all function in all mode.
+" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 "let g:django_projects = '~/Documents/Projects/' "Sets all projects under project
 "let g:django_project_directory = '~/Documents/Projects/'
@@ -324,9 +351,9 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " Enable omni completion.
-"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown,ctp set omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown,ctp set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 "autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 "autocmd FileType php,ctp set omnifunc=phpcomplete#CompletePHP
