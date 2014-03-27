@@ -96,6 +96,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'ctrlp.vim'
 
 " django template highlight
+" use :setfiletype htmldjango on django template files to get the highlight
 Bundle 'django.vim'
 
 "Wombat256 coloscheme
