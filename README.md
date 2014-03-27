@@ -5,7 +5,9 @@ My personal vim configuration, i mainly use vim for django and python programmin
 DISCLAIMER: still in it's early ages
 
 > Installation:
+
 > git clone https://github.com/josecostamartins/vim ~/.vim
+
 > ln -s ~/.vim/vimrc ~/.vimrc
 
 Requirements
@@ -16,7 +18,7 @@ Requirements
 
 There is script located in "vim/initial\_config.sh" that automatically installs vim, python, pip, virtualenv, virtualenvwrapper
 
-** MY SCRIPT DOES NOT WORK ON WINDOWS **
+**MY SCRIPT DOES NOT WORK ON WINDOWS**
 
 Plugins:
 ---
