@@ -1,7 +1,6 @@
 #!/bin/bash
 
 FONTS=~/.vim/fonts/*
-PATH_TO_APPEND=( "PATH=/usr/local/bin:\$PATH" "export PATH" "export WORKON_HOME=~/.virtualenvs" "export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python" "source /usr/local/bin/virtualenvwrapper.sh" )
 SO="none"
 MINPIP_VERSION=1.4
 
@@ -29,8 +28,11 @@ fi
 
 if [ "$(uname)" == "Darwin" ]; then
     SO="mac"
+    PATH_TO_APPEND=( "PATH=/usr/local/bin:\$PATH" "export PATH" "export WORKON_HOME=~/.virtualenvs" "export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python" "source /usr/local/bin/virtualenvwrapper.sh" )
+    
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     SO="linux"
+    PATH_TO_APPEND=( "PATH=/usr/local/bin:\$PATH" "export PATH" "export WORKON_HOME=~/.virtualenvs" "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python" "source /usr/local/bin/virtualenvwrapper.sh" )
 else
     echo "This script only works on Mac OS X and Linux Distributions"
     echo "Exiting..."

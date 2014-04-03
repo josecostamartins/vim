@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vundle configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Setting up Vundle - the vim plugin bundler
+" Setting up Vundle - the vim plugin bundler {
     let iCanHazVundle=1
     let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
     let init_conf=expand('~/.vim/initial_config.sh')
@@ -15,7 +15,7 @@
         endif
         let iCanHazVundle=0
     endif
-
+" }
 set nocompatible              " be iMproved
 filetype off                  " required!
 
@@ -41,6 +41,9 @@ Bundle 'bling/vim-airline'
 
 " python autocompletion
 Bundle 'davidhalter/jedi-vim'
+
+" apparently youcompleteme better than jedi-vim, lets testit
+Bundle 'Valloric/YouCompleteMe'
 
 " minibuffer explorer, help managing buffers
 "Bundle 'fholgado/minibufexpl.vim'
@@ -235,146 +238,201 @@ set wildmenu                                               " show a navigable me
 set wildmode=longest,list,full
 
 
-"folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10     "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+" folding settings {
+    set foldmethod=indent   "fold based on indent
+    set foldnestmax=10     "deepest fold is 10 levels
+    set nofoldenable        "dont fold by default
+    set foldlevel=1         "this is just what i use
+" }
+
 
 " keep selection after shifting it
 vnoremap < <gv
 vnoremap > >gv
 
 autocmd BufWritePre .vimrc,*.py,*.html,*.tex,*.js,*.css :%s/\s\+$//e " remove trailing whitespaces
-" autocmd! bufwritepost .vimrc source % " auto reload .vimrc file
+autocmd! bufwritepost .vimrc source % " auto reload .vimrc file
 
-let mapleader = ","                                    " Allows to use different shortcuts, the default leader key is \
+" YouCompleteMe {
+let g:ycm_filetype_specific_completion_to_disable = { 'python' : 1 }
+let g:ycm_filetype_blacklist = {
+    \ 'python' : 1,
+    \ 'tagbar' : 1,
+    \ 'qf' : 1,
+    \ 'notes' : 1,
+    \ 'markdown' : 1,
+    \ 'unite' : 1,
+    \ 'text' : 1,
+    \ 'vimwiki' : 1,
+    \ 'pandoc' : 1,
+    \ 'mail' : 1
+\}
+" }
 
-" change tabs by pressing command-shift-left or command-shift-right
-map <D-S-left> :tabprevious<CR>
-map <D-S-right> :tabnext<CR>
 
-" simplify changing buffers
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+" jedi-vim {
+    "let g:jedi#auto_vim_configuration = 0
+    "let g:jedi#popup_on_dot = 0
+    "let g:jedi#popup_select_first = 0
+    "let g:jedi#completions_enabled = 0
+    "let g:jedi#completions_command = ""
+    "let g:jedi#show_call_signatures = "1"
 
-" also allow to change buffers using arrow keys
-map <C-left> <C-w>h
-map <C-down> <C-w>j
-map <C-up> <C-w>k
-map <C-right> <C-w>l
+    "let g:jedi#goto_assignments_command = "<leader>pa"
+    "let g:jedi#goto_definitions_command = "<leader>pd"
+    "let g:jedi#documentation_command = "<leader>pk"
+    "let g:jedi#usages_command = "<leader>pu"
+    "let g:jedi#rename_command = "<leader>pr"
+" }
 
-" Swap lines up and down by pression shift-up or shift-down
-map <S-up> :m-2<CR>
-map <S-down> :m+1<CR>
 
-" Save file by pressing ctrl-s
-noremap  <silent> <C-S>  :update<CR>
-inoremap <silent> <C-S>  <C-C>:update<CR>i
-vnoremap <silent> <C-S>  <C-O>:update<CR>gv
+" mappings {
+    let mapleader = ","                                    " Allows to use different shortcuts, the default leader key is \
 
-" map sort function to a key
-vnoremap <leader>s :sort<CR>
+    " change tabs by pressing command-shift-left or command-shift-right
+    map <D-S-left> :tabprevious<CR>
+    map <D-S-right> :tabnext<CR>
 
-" force circumflex to go to first non-blak character of the line
-nnoremap ^ 0w
+    " simplify changing buffers
+    map <C-h> <C-w>h
+    map <C-j> <C-w>j
+    map <C-k> <C-w>k
+    map <C-l> <C-w>l
 
-" Syntastic configuration for python
-let g:syntastic_python_checkers = ['flake8', 'pylint']
-let g:syntastic_python_flake8_args='--ignore=E126,E128,E124,E123'
-let g:syntastic_python_pylint_args="--indent-string='    '"
+    " also allow to change buffers using arrow keys
+    map <C-left> <C-w>h
+    map <C-down> <C-w>j
+    map <C-up> <C-w>k
+    map <C-right> <C-w>l
 
-" LaTeX-Box Configuration
-let g:LatexBox_latexmk_options = "-pdf -pvc"
-let g:LatexBox_latexmk_async=1
-let g:LatexBox_latexmk_preview_continuously=1
-let g:LatexBox_autojump = 1
+    " Swap lines up and down by pression shift-up or shift-down
+    map <S-up> :m-2<CR>
+    map <S-down> :m+1<CR>
 
-" indent guidelines
-set list lcs=tab:\|\
+    " Save file by pressing ctrl-s
+    noremap  <silent> <C-S>  :update<CR>
+    inoremap <silent> <C-S>  <C-C>:update<CR>i
+    vnoremap <silent> <C-S>  <C-O>:update<CR>gv
 
+    " map sort function to a key
+    vnoremap <leader>s :sort<CR>
+
+    " force circumflex to go to first non-blak character of the line
+    nnoremap ^ 0w
+" }
+
+" Syntastic configuration for python {
+    let g:syntastic_python_checkers = ['flake8', 'pylint']
+    let g:syntastic_python_flake8_args='--ignore=E126,E128,E124,E123,E221'
+    let g:syntastic_python_pylint_args="--indent-string='    '"
+" }
+
+" LaTeX-Box Configuration {
+    let g:LatexBox_latexmk_options = "-pdf -pvc"
+    let g:LatexBox_latexmk_async=1
+    let g:LatexBox_latexmk_preview_continuously=1
+    let g:LatexBox_autojump = 1
+" }
+
+" indent guidelines {
+    set list lcs=tab:\|\
+" }
+"
 " let g:indent_guides_auto_colors = 0
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 
-" SuperTab configuration
-" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-
-" Django configuration
-
-" emmet-vim integration with ultisnips
-"let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-let g:user_emmet_mode='a'    "enable all function in all mode.
-" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-
-"let g:django_projects = '~/Documents/Projects/' "Sets all projects under project
-"let g:django_project_directory = '~/Documents/Projects/'
-" let g:django_project_container = 'source' "Inside of these folders look for source
-"let g:django_activate_virtualenv = 0 "Try to activate the associated virtualenv
-"let g:django_activate_nerdtree = 0 "Try to open nerdtree at the project root.
-
-"ctrlp configuration
-
-"start ctrlp in the current folder
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
-
-" let g:ctrlp_working_path_mode = 0
-
-" tab navigation
-"nmap tn :tabn<CR>
-"nmap tp :tabp<CR>
-"nmap tm :tabm
-"nmap tt :tabnew
-"nmap ts :tab split<CR>
-
-" minibufexpl toggle
-" map <Leader>t :MBEToggle<cr>
-
-" noremap <C-TAB>   :MBEbn<CR>
-" noremap <C-S-TAB> :MBEbp<CR>
+" SuperTab configuration {
+    let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+    "let g:SuperTabDefaultCompletionType = "<c-n>"
+" }
 
 
-" NERDTree (better file browser) toggle
-" map <leader>t :NERDTreeToggle<CR>
+" Emmet configuration{
+    " emmet-vim integration with ultisnips
+    "let g:user_emmet_install_global = 0
+    autocmd FileType html,css EmmetInstall
+    let g:user_emmet_mode='a'    "enable all function in all mode.
+    " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+" }
 
-" Ignore files on NERDTree
-" let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+" Django configuration {
+    "let g:django_projects = '~/Documents/Projects/' "Sets all projects under project
+    "let g:django_project_directory = '~/Documents/Projects/'
+    " let g:django_project_container = 'source' "Inside of these folders look for source
+    "let g:django_activate_virtualenv = 0 "Try to activate the associated virtualenv
+    "let g:django_activate_nerdtree = 0 "Try to open nerdtree at the project root.
+" }
+
+"ctrlp configuration {
+    "start ctrlp in the current folder
+    let g:ctrlp_working_path_mode = 'a'
+    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
+    " let g:ctrlp_working_path_mode = 0
+"}
+
+" tab navigation {
+    "nmap tn :tabn<CR>
+    "nmap tp :tabp<CR>
+    "nmap tm :tabm
+    "nmap tt :tabnew
+    "nmap ts :tab split<CR>
+"}
+
+" Mini Buffer Explorer {
+    " minibufexpl toggle
+    " map <Leader>t :MBEToggle<cr>
+
+    " noremap <C-TAB>   :MBEbn<CR>
+    " noremap <C-S-TAB> :MBEbp<CR>
+"}
+
+"  NERDTree {
+    " NERDTree (better file browser) toggle
+    " map <leader>t :NERDTreeToggle<CR>
+
+    " Ignore files on NERDTree
+    " let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+" }
 
 " Set autocomplete form
 "set completeopt=menuone,longest
 
 
-"--- python formatting help ---
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+" omnicompletion {
+    "--- python formatting help ---
+    autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-" Enable omni completion.
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown,ctp set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-"autocmd FileType php,ctp set omnifunc=phpcomplete#CompletePHP
-"autocmd FileType vim set omnifunc=syntaxcomplete#Complete
+    " Enable omni completion.
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown,ctp set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    "autocmd FileType python set omnifunc=pythoncomplete#Complete
+    "autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+    "autocmd FileType php,ctp set omnifunc=phpcomplete#CompletePHP
+    "autocmd FileType vim set omnifunc=syntaxcomplete#Complete
+"}
 
-" remaping the save to ctrl-z
-"noremap <D-z> :update<CR>
-"vnoremap <D-z> <D-C> :update<CR>
-"inoremap <D-z> <D-O> :update<CR>
+" remaping the save to ctrl-z {
+    "noremap <D-z> :update<CR>
+    "vnoremap <D-z> <D-C> :update<CR>
+    "inoremap <D-z> <D-O> :update<CR>
+" }
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-"if executable('ag')
-"  let g:ackprg = 'ag --nogroup --column'
+" Silver Searcher {
+    " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+    "if executable('ag')
+    "  let g:ackprg = 'ag --nogroup --column'
 
-  " Use Ag over Grep
-"  set grepprg=ag\ --nogroup\ --nocolor
+      " Use Ag over Grep
+    "  set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"endif
+      " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    "  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    "endif
+" }
 
-" maps the command ,-shift-v to source my vimrc, maybe this is not needed
-map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+" Reload vimrc {
+    " maps the command <leader>-shift-v to source my vimrc, maybe this is not needed
+    map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+" }
