@@ -74,6 +74,7 @@ if [ "$SO" == "mac" ]; then
 
     BASH_PROFILE=~/.bash_profile
     FONTS_PATH=~/Library/Fonts
+    pip install --upgrade pip
     pip install flake8
     pip install jedi
     pip install virtualenv
@@ -87,6 +88,7 @@ elif [ "$SO" == "linux" ]; then
     FONTS_PATH=~/.fonts
     sudo apt-get install vim
     sudo apt-get install python-pip python-dev build-essential
+    sudo pip install --upgrade pip
     sudo pip install flake8
     sudo pip install jedi
     sudo pip install virtualenv
