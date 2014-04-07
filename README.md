@@ -10,6 +10,11 @@ DISCLAIMER: still in it's early ages
 
 > ln -s ~/.vim/vimrc ~/.vimrc
 
+> vim [filename]
+
+This will clone my vim repository to ~/.vim (which is a hidden folder inside the user's home folder), then with "ln -s" we will create a symbolic link (A.K.A. symlink), the full installation is triggered when opening vim. This installation process only occurs the first time you open vim. If something goes wrong with the installation process, you can reinstall everything by executing ~/.vim/initial_config.sh.
+
+
 Requirements
 ---
 * You need to have **sudo privileges**.
