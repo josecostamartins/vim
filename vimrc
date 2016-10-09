@@ -9,7 +9,7 @@
         echo "Installing Vundle.."
         echo ""
         silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+        silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
         if filereadable(init_conf)
             silent ! ~/.vim/initial_config.sh
         endif
@@ -20,7 +20,7 @@ set nocompatible              " be iMproved
 filetype off                  " required!
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 
 
@@ -119,6 +119,7 @@ if iCanHazVundle == 0
     :BundleInstall
 endif
 
+call vundle#end()            " required
 filetype plugin indent on     " required!
 "
 " Brief help
