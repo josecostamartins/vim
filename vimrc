@@ -9,7 +9,7 @@
         echo "Installing Vundle.."
         echo ""
         silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
+        silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
         if filereadable(init_conf)
             silent ! ~/.vim/initial_config.sh
         endif
@@ -19,14 +19,15 @@
 set nocompatible              " be iMproved
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+"Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " My bundles here:
 
@@ -34,76 +35,77 @@ Bundle 'gmarik/vundle'
 " original repos on GitHub "
 """"""""""""""""""""""""""""
 " solarized theme
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 
 " status line revamped
-Bundle 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " python autocompletion
-Bundle 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 
 " apparently youcompleteme better than jedi-vim, lets testit
-Bundle 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 " minibuffer explorer, help managing buffers
-"Bundle 'fholgado/minibufexpl.vim'
+"Plugin 'fholgado/minibufexpl.vim'
 
 " Virtualenv commands inside vim
-Bundle 'jmcantrell/vim-virtualenv'
+Plugin 'jmcantrell/vim-virtualenv'
 
 " file explorer
-"Bundle 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
 
 " Comment more easily
-Bundle "scrooloose/nerdcommenter"
+Plugin 'scrooloose/nerdcommenter'
 
 " syntax checker for many languages
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
 " Django Commands
-Bundle 'jmcomets/vim-pony'
-" Bundle 'cwood/vim-jango'
+Plugin 'jmcomets/vim-pony'
+" Plugin 'cwood/vim-jango'
 
 " html crazy completion
-Bundle "mattn/emmet-vim"
+Plugin 'mattn/emmet-vim'
 
 " Latex plugin
-Bundle 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 " Creates indentations guides within text
-Bundle 'Yggdroot/indentLine'
+Plugin 'Yggdroot/indentLine'
 
 " Lets me use <tab> instead of <c-space> for completion
 " Bonus for using jedi when filetype is python
-Bundle 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 
 " UtilSnips for snippets, apparently it's awesome
-Bundle 'SirVer/ultisnips'
+Plugin 'SirVer/ultisnips'
 
 " wombat modified colorscheme
-Bundle 'michalbachowski/vim-wombat256mod'
+Plugin 'michalbachowski/vim-wombat256mod'
 
 " monokai theme
-Bundle 'sickill/vim-monokai'
+Plugin 'sickill/vim-monokai'
 
 " manipulate surroundings
-Bundle "tpope/vim-surround"
+Plugin 'tpope/vim-surround'
 
 " tabularization of csv data
-Bundle 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'
 
 """""""""""""""""""""
 " vim-scripts repos "
 """""""""""""""""""""
 " open files easily by pressing ctrl+p and typing the filename
-Bundle 'ctrlp.vim'
+Plugin 'ctrlp.vim'
 
 " django template highlight
 " use :setfiletype htmldjango on django template files to get the highlight
-Bundle 'django.vim'
+Plugin 'django.vim'
 
 "Wombat256 coloscheme
-Bundle 'wombat256.vim'
+Plugin 'wombat256.vim'
 
 """"""""""""""""""""
 " non-GitHub repos "
@@ -114,22 +116,22 @@ Bundle 'wombat256.vim'
 " First time install for vundle "
 """""""""""""""""""""""""""""""""
 if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
+    echo "Installing Plugins, please ignore key map error messages"
     echo ""
-    :BundleInstall
+    :PluginInstall
 endif
 
 call vundle#end()            " required
 filetype plugin indent on     " required!
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+" :PluginList          - list configured bundles
+" :PluginInstall(!)    - install (update) bundles
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle commands are not allowed.
+" NOTE: comments after Plugin commands are not allowed.
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
