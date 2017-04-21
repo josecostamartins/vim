@@ -3,13 +3,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setting up Vundle - the vim plugin bundler {
     let iCanHazVundle=1
-    let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+    let plugin_manager=expand('~/.vim/autoload/plug.vim')
     let init_conf=expand('~/.vim/initial_config.sh')
-    if !filereadable(vundle_readme)
+    if !filereadable(plugin_manager)
         echo "Installing Vundle.."
         echo ""
         silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         if filereadable(init_conf)
             silent ! ~/.vim/initial_config.sh
         endif
@@ -19,15 +19,15 @@
 set nocompatible              " be iMproved
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin()
 
 
 
 " let Vundle manage Vundle
 " required!
-"Plugin 'gmarik/vundle'
-Plugin 'VundleVim/Vundle.vim'
+"Plug 'gmarik/vundle'
+Plug 'VundleVim/Vundle.vim'
 
 " My bundles here:
 
@@ -35,77 +35,77 @@ Plugin 'VundleVim/Vundle.vim'
 " original repos on GitHub "
 """"""""""""""""""""""""""""
 " solarized theme
-Plugin 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 
 " status line revamped
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " python autocompletion
-Plugin 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 
 " apparently youcompleteme better than jedi-vim, lets testit
-"Plugin 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 
 " minibuffer explorer, help managing buffers
-"Plugin 'fholgado/minibufexpl.vim'
+"Plug 'fholgado/minibufexpl.vim'
 
 " Virtualenv commands inside vim
-Plugin 'jmcantrell/vim-virtualenv'
+Plug 'jmcantrell/vim-virtualenv'
 
 " file explorer
-"Plugin 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 
 " Comment more easily
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 " syntax checker for many languages
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " Django Commands
-Plugin 'jmcomets/vim-pony'
-" Plugin 'cwood/vim-jango'
+Plug 'jmcomets/vim-pony'
+" Plug 'cwood/vim-jango'
 
 " html crazy completion
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
 " Latex plugin
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 
 " Creates indentations guides within text
-Plugin 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 
 " Lets me use <tab> instead of <c-space> for completion
 " Bonus for using jedi when filetype is python
-Plugin 'ervandew/supertab'
+Plug 'ervandew/supertab'
 
 " UtilSnips for snippets, apparently it's awesome
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 " wombat modified colorscheme
-Plugin 'michalbachowski/vim-wombat256mod'
+Plug 'michalbachowski/vim-wombat256mod'
 
 " monokai theme
-Plugin 'sickill/vim-monokai'
+Plug 'sickill/vim-monokai'
 
 " manipulate surroundings
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " tabularization of csv data
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 """""""""""""""""""""
 " vim-scripts repos "
 """""""""""""""""""""
 " open files easily by pressing ctrl+p and typing the filename
-Plugin 'ctrlp.vim'
+Plug 'ctrlp.vim'
 
 " django template highlight
 " use :setfiletype htmldjango on django template files to get the highlight
-Plugin 'django.vim'
+Plug 'django.vim'
 
 "Wombat256 coloscheme
-Plugin 'wombat256.vim'
+Plug 'wombat256.vim'
 
 """"""""""""""""""""
 " non-GitHub repos "
@@ -116,22 +116,22 @@ Plugin 'wombat256.vim'
 " First time install for vundle "
 """""""""""""""""""""""""""""""""
 if iCanHazVundle == 0
-    echo "Installing Plugins, please ignore key map error messages"
+    echo "Installing Plugs, please ignore key map error messages"
     echo ""
-    :PluginInstall
+    :PlugInstall
 endif
 
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on     " required!
 "
 " Brief help
-" :PluginList          - list configured bundles
-" :PluginInstall(!)    - install (update) bundles
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused bundles
+" :PlugList          - list configured bundles
+" :PlugInstall(!)    - install (update) bundles
+" :PlugSearch(!) foo - search (or refresh cache first) for foo
+" :PlugClean(!)      - confirm (or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plugin commands are not allowed.
+" NOTE: comments after Plug commands are not allowed.
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,7 +233,7 @@ set showcmd                                                " show the command yo
 set smartcase                                              " case-sensitive search if any caps
 set splitbelow                                             " Puts new split windows to the bottom of the current
 set splitright                                             " Puts new vsplit windows to the right of the current
-set tabstop=4
+set tabstop=4                                              " Set a tab to be 4 whitespaces
 set textwidth=79                                           " Limit size of line to 79 characters, python recommended
 set ttimeoutlen=50                                         " set a timeout, this makes moving in and out of Insert Mode quicker
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
@@ -281,11 +281,11 @@ let g:ycm_filetype_blacklist = {
     "let g:jedi#completions_command = ""
     "let g:jedi#show_call_signatures = "1"
 
-    "let g:jedi#goto_assignments_command = "<leader>pa"
-    "let g:jedi#goto_definitions_command = "<leader>pd"
-    "let g:jedi#documentation_command = "<leader>pk"
-    "let g:jedi#usages_command = "<leader>pu"
-    "let g:jedi#rename_command = "<leader>pr"
+    let g:jedi#goto_assignments_command = "<leader>goa"
+    let g:jedi#goto_definitions_command = "<leader>god"
+    let g:jedi#documentation_command = "<leader>doc"
+    let g:jedi#usages_command = "<leader>use"
+    let g:jedi#rename_command = "<leader>ren"
 " }
 
 
@@ -322,6 +322,9 @@ let g:ycm_filetype_blacklist = {
 
     " force circumflex to go to first non-blak character of the line
     nnoremap ^ 0w
+
+    vmap <C-x> :!pbcopy<CR>
+    vmap <C-c> :w !pbcopy<CR><CR>
 " }
 
 " Syntastic configuration for python {

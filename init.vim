@@ -1,0 +1,1 @@
+/Users/josecostamartins/.config/nvim/vimrc
