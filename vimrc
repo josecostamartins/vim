@@ -27,7 +27,7 @@ call plug#begin()
 " let Vundle manage Vundle
 " required!
 "Plug 'gmarik/vundle'
-Plug 'VundleVim/Vundle.vim'
+"Plug 'VundleVim/Vundle.vim'
 
 " My bundles here:
 
@@ -94,18 +94,21 @@ Plug 'tpope/vim-surround'
 " tabularization of csv data
 Plug 'godlygeek/tabular'
 
+" swift support
+Plug 'keith/swift.vim'
+
 """""""""""""""""""""
 " vim-scripts repos "
 """""""""""""""""""""
 " open files easily by pressing ctrl+p and typing the filename
-Plug 'ctrlp.vim'
+Plug 'ctrlpvim/ctrlp'
 
 " django template highlight
 " use :setfiletype htmldjango on django template files to get the highlight
-Plug 'django.vim'
+"Plug 'django.vim'
 
 "Wombat256 coloscheme
-Plug 'wombat256.vim'
+Plug '/vim-scripts/wombat256'
 
 """"""""""""""""""""
 " non-GitHub repos "
@@ -176,12 +179,13 @@ endif
 
 set noshowmode " hide original status line because of airline
 set laststatus=2 " always show statusline, needed in order to display airline
-set guifont=Source\ Code\ Pro\ for\ Powerline:h14
+set guifont=Hack:h14
+"set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 "set guifont=Monaco\ For\ Powerline
 "set guifont=Menlo\ For\ Powerline
 "set guifont=Liberation\ Mono\ For\ Powerline:h13
 
-let g:airline_theme = 'murmur'
+let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -321,7 +325,7 @@ let g:ycm_filetype_blacklist = {
     vnoremap <leader>s :sort<CR>
 
     " force circumflex to go to first non-blak character of the line
-    nnoremap ^ 0w
+    "nnoremap ^ 0w
 
     vmap <C-x> :!pbcopy<CR>
     vmap <C-c> :w !pbcopy<CR><CR>
